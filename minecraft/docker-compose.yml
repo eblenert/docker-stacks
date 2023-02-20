@@ -27,9 +27,13 @@ services:
     stdin_open: true
     restart: unless-stopped
     volumes:
-      - /minecraft-data/survival-01:/data
-      - ./dynmap-web:/web
+      - survival-01:/data
+      - dynmap-web:/web
     logging:
       driver: "json-file"
       options:
         max-size: "5m"
+
+volumes:
+  survival-01:
+  dynmap-web:
