@@ -37,8 +37,6 @@ services:
     image: nginxproxy/acme-companion
     restart: always
     container_name: nginx-proxy-acme
-    environment:
-      - DEFAULT_EMAIL=erik.blenert@gmail.com
     volumes_from:
       - nginx-proxy
     volumes:
