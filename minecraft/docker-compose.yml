@@ -1,6 +1,24 @@
 version: "3"
 
 services:
+  nginx-dynmap:
+    image: nginx:latest
+    restart: unless-stopped
+    networks:
+      - web-internal
+    volumes:
+      - conf:/etc/nginx/conf.d/
+      - dynmap-web:/usr/share/nginx/html/
+    environment:
+      - VIRTUAL_HOST
+      - VIRTUAL_PORT
+      - LETSENCRYPT_HOST
+      - LETSENCRYPT_EMAIL
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+
   mc:
     image: itzg/minecraft-server
     ports:
