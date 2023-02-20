@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  nginx-proxy:
+    restart: always
+    image: nginx
+    container_name: nginx-proxy
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs
+
+  dockergen:
+    restart: always
+    image: nginxproxy/docker-gen
+    container_name: nginx-proxy-dockergen
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen
+    command: -notify-sighup nginx-proxy -watch /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+    depends_on:
+      - nginx-proxy
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    restart: always
+    container_name: nginx-proxy-acme
+    environment:
+      - DEFAULT_EMAIL=erik.blenert@gmail.com
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  default:
+    name: web-internal
+
+volumes:
+  conf:
+  vhost:
+  html:
+  certs:
+  acme:
