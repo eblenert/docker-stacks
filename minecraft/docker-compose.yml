@@ -55,3 +55,9 @@ services:
 volumes:
   survival-01:
   dynmap-web:
+  conf:
+
+networks:
+  web-internal:
+    name: web-internal
+    external: true
