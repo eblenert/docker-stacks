@@ -3,6 +3,7 @@ version: "2.1"
 services:
   firefox:
     image: lscr.io/linuxserver/firefox:latest
+    priviledged: true
     container_name: firefox
     security_opt:
       - seccomp:unconfined #optional
