@@ -26,7 +26,7 @@ services:
       - 19132:19132/udp
       - 19133:19133/udp
     environment:
-      - VERSION=1.19.3
+      - VERSION=1.19.4
       - INIT_MEMORY=6G
       - MAX_MEMORY=8G
       - EULA=TRUE
