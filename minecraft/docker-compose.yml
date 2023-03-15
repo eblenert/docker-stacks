@@ -41,6 +41,7 @@ services:
       - SPAWN_PROTECTION=4
       - TZ=Europe/Bucharest
       - NETWORK_COMPRESSION_THRESHOLD=-1
+      - BUILD_FROM_SOURCE=true
     tty: true
     stdin_open: true
     restart: unless-stopped
