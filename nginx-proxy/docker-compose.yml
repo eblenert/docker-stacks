@@ -29,7 +29,7 @@ services:
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+      - tmpl/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
     depends_on:
       - nginx-proxy
 
@@ -56,3 +56,6 @@ volumes:
   html:
   certs:
   acme:
+  tmpl:
+    external: true
+    name: nginx-tmpl
