@@ -7,7 +7,6 @@ services:
     networks:
       - web-internal
     volumes:
-      - conf:/etc/nginx/conf.d/
       - dynmap-web:/usr/share/nginx/html/
     environment:
       - VIRTUAL_HOST
@@ -46,7 +45,8 @@ services:
     stdin_open: true
     restart: unless-stopped
     volumes:
-      - survival-01:/data
+      - survival-world:/data
+      - survival-plugins:/plugins
       - dynmap-web:/web
     logging:
       driver: "json-file"
@@ -54,9 +54,15 @@ services:
         max-size: "5m"
 
 volumes:
-  survival-01:
+  survival-world:
+    external: true
+    name: survival-world
+  survival-plugins:
+    external: true
+    name: survival-plugins
   dynmap-web:
-  conf:
+    external: true
+    name: dynmap-web
 
 networks:
   web-internal:
