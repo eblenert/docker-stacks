@@ -26,8 +26,8 @@ services:
       - 19133:19133/udp
     environment:
       - VERSION=1.19.4
-      - INIT_MEMORY=6G
-      - MAX_MEMORY=8G
+      - INIT_MEMORY=2G
+      - MAX_MEMORY=5G
       - EULA=TRUE
       - TYPE=SPIGOT
       - DIFFICULTY=hard
