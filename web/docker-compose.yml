@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  nginx-dynmap:
+    image: nginx:latest
+    restart: unless-stopped
+    networks:
+      - web-internal
+    volumes:
+      - dynmap-web:/usr/share/nginx/html/
+    environment:
+      - VIRTUAL_HOST
+      - VIRTUAL_PORT
+      - LETSENCRYPT_HOST
+      - LETSENCRYPT_EMAIL
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+
+networks:
+  web-internal:
+    external: true
+    name: web-internal
+
+volumes:
+  dynmap-web:
+    external: true
+    name: minecraft-dynmap-web
