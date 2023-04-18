@@ -1,29 +1,46 @@
 version: "3"
 
 services:
-  nginx-dynmap:
-    image: nginx:latest
+  
+  adminer:
+    image: adminer
     restart: unless-stopped
-    networks:
-      - web-internal
-    volumes:
-      - dynmap-web:/usr/share/nginx/html/
-    environment:
-      - VIRTUAL_HOST
-      - VIRTUAL_PORT
-      - LETSENCRYPT_HOST
-      - LETSENCRYPT_EMAIL
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "5m"
-
-  mc:
-    image: itzg/minecraft-server
     ports:
-      - 25565:25565
-      - 19132:19132/udp
-      - 19133:19133/udp
+      - 8080:8080
+  db:
+    image: mariadb
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD
+    volumes:
+      - db-storage:/var/lib/mysql
+  creative:
+    image: itzg/minecraft-server
+    environment:
+      - VERSION=1.19.4
+      - INIT_MEMORY=2G
+      - MAX_MEMORY=5G
+      - EULA=TRUE
+      - TYPE=SPIGOT
+      - ENFORCE_WHITELIST=TRUE
+      - ENABLE_WHITELIST=TRUE
+      - MAX_PLAYERS=10
+      - VIEW_DISTANCE=10
+      - FORCE_GAMEMODE=true
+      - MODE=creative
+      - NETWORK_COMPRESSION_THRESHOLD=-1
+      - TZ=Europe/Bucharest
+      - BUILD_FROM_SOURCE=true
+      - LEVEL_TYPE=flat
+      - GENERATE_STRUCTURES=false
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    volumes:
+      - creative-world:/data
+  survival:
+    image: itzg/minecraft-server
+
     environment:
       - VERSION=1.19.4
       - INIT_MEMORY=2G
@@ -41,30 +58,45 @@ services:
       - TZ=Europe/Bucharest
       - NETWORK_COMPRESSION_THRESHOLD=-1
       - BUILD_FROM_SOURCE=true
+      - MARIADB_SURVIVAL_PASSWORD
     tty: true
     stdin_open: true
     restart: unless-stopped
+    ports:
+      - 19132:19132/udp
+      - 19133:19133/udp
     volumes:
       - survival-world:/data
-      - survival-plugins:/plugins
       - dynmap-web:/web
     logging:
       driver: "json-file"
       options:
         max-size: "5m"
 
+  mc-router:
+    image: itzg/mc-router
+    ports:
+      - 25565:25565
+
+    command: --mapping=minecraft.tbcl.ro=survival:25565,survival.minecraft.tbcl.ro=survival:25565,creative.minecraft.tbcl.ro=creative:25565
+  
 volumes:
   survival-world:
     external: true
-    name: survival-world
+    name: minecraft-survival-world
   survival-plugins:
     external: true
-    name: survival-plugins
+    name: minecraft-survival-plugins
   dynmap-web:
     external: true
-    name: dynmap-web
+    name: minecraft-dynmap-web
+  creative-world:
+    external: true
+    name: minecraft-creative-world
+  db-storage:
+    external: true
+    name: minecraft-db-storage
 
 networks:
-  web-internal:
-    name: web-internal
-    external: true
+  mc-net:
+    name: mc-net
