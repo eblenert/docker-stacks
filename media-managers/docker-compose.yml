@@ -3,12 +3,12 @@ version: "3"
 services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
-    container_name: config-radarr
+    container_name: radarr
     environment:
       - PUID=1000
       - PGID=1000
     volumes:
-      - config:/config
+      - config-radarr:/config
       - movies:/movies
 
     ports:
