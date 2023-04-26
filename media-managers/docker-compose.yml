@@ -1,16 +1,16 @@
 version: "3"
 
 services:
-  prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
-    container_name: prowlarr
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
     environment:
       - PUID=1000
       - PGID=1000
     volumes:
-      - config-prowlarr:/config
+      - config-jackett:/config
     ports:
-      - 9696:9696
+      - 9117:9117
     restart: unless-stopped
 
   radarr:
@@ -31,9 +31,9 @@ volumes:
   config-radarr:
     external: true
     name: config-radarr
-  config-prowlarr:
+  config-jackett:
     external: true
-    name: config-prowlarr
+    name: config-jackett
   movies:
     external: true
     name: movies
