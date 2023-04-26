@@ -31,6 +31,9 @@ volumes:
   config-radarr:
     external: true
     name: config-radarr
+  config-prowlarr:
+    external: true
+    name: config-prowlarr
   movies:
     external: true
     name: movies
