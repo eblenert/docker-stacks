@@ -14,7 +14,7 @@ services:
         max-size: "5m"
 
   db:
-    image: mariadb
+    image: mariadb:10.10
     restart: unless-stopped
     environment:
       - MARIADB_ROOT_PASSWORD
