@@ -114,5 +114,5 @@ volumes:
     name: minecraft-db-storage
 
 networks:
-  mc-net:
+  default:
     name: mc-net
