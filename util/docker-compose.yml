@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     container_name: iperf3-server
     image: networkstatic/iperf3
+    command: -s
     stdin_open: true
     tty: true
     ports:
