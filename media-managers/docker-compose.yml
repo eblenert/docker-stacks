@@ -27,7 +27,7 @@ services:
       - HOST_WHITELIST= #optional
     volumes:
       - config-transmission:/config
-      - movies:/downloads/movies
+      - movies:/downloads/complete/movies
     ports:
       - 9091:9091
       - 51413:51413
