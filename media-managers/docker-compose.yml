@@ -10,15 +10,37 @@ services:
     volumes:
       - config-radarr:/config
       - movies:/movies
-
     ports:
       - 7878:7878
+    restart: unless-stopped
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TRANSMISSION_WEB_HOME= #optional
+      - USER= #optional
+      - PASS= #optional
+      - WHITELIST= #optional
+      - PEERPORT= #optional
+      - HOST_WHITELIST= #optional
+    volumes:
+      - config-transmission:/config
+      - movies:/movies
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
     restart: unless-stopped
 
 volumes:
   config-radarr:
     external: true
     name: config-radarr
+  config-transmission:
+    external: true
+    name: config-transmission
   movies:
     external: true
     name: movies
