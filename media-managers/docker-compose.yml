@@ -9,7 +9,7 @@ services:
       - PGID=1000
     volumes:
       - config-radarr:/config
-      - movies:/movies
+      - movies:/downloads/movies
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -27,7 +27,7 @@ services:
       - HOST_WHITELIST= #optional
     volumes:
       - config-transmission:/config
-      - movies:/downloads/complete/movies
+      - movies:/downloads/movies
     ports:
       - 9091:9091
       - 51413:51413
