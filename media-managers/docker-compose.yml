@@ -16,8 +16,8 @@ services:
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
+    user: "abc:users"
     environment:
-      - UID=1000
       - PUID=1000
       - PGID=1000
       - TRANSMISSION_WEB_HOME= #optional
