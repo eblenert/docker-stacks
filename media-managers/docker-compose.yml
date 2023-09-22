@@ -12,6 +12,8 @@ services:
     volumes:
       - config-radarr:/config
       - movies:/downloads/movies
+    networks:
+      - web-internal
 #    ports:
 #      - 7878:7878
     restart: unless-stopped
@@ -47,3 +49,8 @@ volumes:
   movies:
     external: true
     name: movies
+
+networks:
+  web-internal:
+    external: true
+    name: web-internal
