@@ -14,6 +14,7 @@ services:
       - movies:/downloads/movies
     networks:
       - web-internal
+      - media-internal
 #    ports:
 #      - 7878:7878
     restart: unless-stopped
@@ -37,6 +38,8 @@ services:
       - 9091:9091
       - 51413:51413
       - 51413:51413/udp
+    networks:
+      - media-internal
     restart: unless-stopped
 
 volumes:
@@ -54,3 +57,6 @@ networks:
   web-internal:
     external: true
     name: web-internal
+  media-internal:
+    external: true
+    name: media-internal
