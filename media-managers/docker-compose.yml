@@ -34,6 +34,7 @@ services:
     volumes:
       - config-transmission:/config
       - movies:/downloads/movies
+      - downloads:/downloads/data
     ports:
       - 9091:9091
       - 51413:51413
@@ -52,6 +53,9 @@ volumes:
   movies:
     external: true
     name: movies
+  downloads:
+    external: true
+    name: downloads
 
 networks:
   web-internal:
