@@ -27,9 +27,9 @@ services:
       options:
         max-size: "5m"
 
- creative:
-   image: itzg/minecraft-server
-   environment:
+  creative:
+    image: itzg/minecraft-server
+    environment:
      - VERSION=1.19.4
      - INIT_MEMORY=2G
      - MAX_MEMORY=5G
@@ -46,15 +46,15 @@ services:
      - BUILD_FROM_SOURCE=true
      - LEVEL_TYPE=flat
      - GENERATE_STRUCTURES=false
-   tty: true
-   stdin_open: true
-   restart: always
-   volumes:
-     - creative-world:/data
-   logging:
-     driver: "json-file"
-     options:
-       max-size: "5m"
+    tty: true
+    stdin_open: true
+    restart: always
+    volumes:
+      - creative-world:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
 
   survival:
     image: itzg/minecraft-server
@@ -94,16 +94,15 @@ services:
         max-size: "5m"
 
   mc-router:
-   image: itzg/mc-router
-   restart: always
-   ports:
+    image: itzg/mc-router
+    restart: always
+    ports:
      - 25565:25565
     command: --mapping=minecraft.tbcl.ro=survival:25565,survival.minecraft.tbcl.ro=survival:25565,creative.minecraft.tbcl.ro=creative:25565
-  #  command: --mapping=minecraft.tbcl.ro=survival:25565
-   logging:
-     driver: "json-file"
-     options:
-       max-size: "5m"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
 
 volumes:
   survival-world:
