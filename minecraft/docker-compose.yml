@@ -97,6 +97,8 @@ services:
     restart: always
     ports:
      - 25565:25565
+    networks:
+     - mc-net
     command: --mapping=minecraft.tbcl.ro=survival:25565,survival.minecraft.tbcl.ro=survival:25565,creative.minecraft.tbcl.ro=creative:25565
     logging:
       driver: "json-file"
