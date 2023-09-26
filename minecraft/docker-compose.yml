@@ -27,34 +27,34 @@ services:
       options:
         max-size: "5m"
 
-#  creative:
-#    image: itzg/minecraft-server
-#    environment:
-#      - VERSION=1.19.4
-#      - INIT_MEMORY=2G
-#      - MAX_MEMORY=5G
-#      - EULA=TRUE
-#      - TYPE=SPIGOT
-#      - ENFORCE_WHITELIST=TRUE
-#      - ENABLE_WHITELIST=TRUE
-#      - MAX_PLAYERS=10
-#      - VIEW_DISTANCE=10
-#      - FORCE_GAMEMODE=true
-#      - MODE=creative
-#      - NETWORK_COMPRESSION_THRESHOLD=-1
-#      - TZ=Europe/Bucharest
-#      - BUILD_FROM_SOURCE=true
-#      - LEVEL_TYPE=flat
-#      - GENERATE_STRUCTURES=false
-#    tty: true
-#    stdin_open: true
-#    restart: always
-#    volumes:
-#      - creative-world:/data
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "5m"
+ creative:
+   image: itzg/minecraft-server
+   environment:
+     - VERSION=1.19.4
+     - INIT_MEMORY=2G
+     - MAX_MEMORY=5G
+     - EULA=TRUE
+     - TYPE=SPIGOT
+     - ENFORCE_WHITELIST=TRUE
+     - ENABLE_WHITELIST=TRUE
+     - MAX_PLAYERS=10
+     - VIEW_DISTANCE=10
+     - FORCE_GAMEMODE=true
+     - MODE=creative
+     - NETWORK_COMPRESSION_THRESHOLD=-1
+     - TZ=Europe/Bucharest
+     - BUILD_FROM_SOURCE=true
+     - LEVEL_TYPE=flat
+     - GENERATE_STRUCTURES=false
+   tty: true
+   stdin_open: true
+   restart: always
+   volumes:
+     - creative-world:/data
+   logging:
+     driver: "json-file"
+     options:
+       max-size: "5m"
 
   survival:
     image: itzg/minecraft-server
@@ -93,22 +93,22 @@ services:
       options:
         max-size: "5m"
 
-  #mc-router:
-  #  image: itzg/mc-router
-  #  restart: always
-  #  ports:
-  #    - 25565:25565
-    #command: --mapping=minecraft.tbcl.ro=survival:25565,survival.minecraft.tbcl.ro=survival:25565,creative.minecraft.tbcl.ro=creative:25565
+  mc-router:
+   image: itzg/mc-router
+   restart: always
+   ports:
+     - 25565:25565
+    command: --mapping=minecraft.tbcl.ro=survival:25565,survival.minecraft.tbcl.ro=survival:25565,creative.minecraft.tbcl.ro=creative:25565
   #  command: --mapping=minecraft.tbcl.ro=survival:25565
-  #  logging:
-  #    driver: "json-file"
-  #    options:
-  #      max-size: "5m"
+   logging:
+     driver: "json-file"
+     options:
+       max-size: "5m"
 
 volumes:
   survival-world:
     external: true
-    name: minecraft-survival-world
+    name: minecraft-survival-world-new
   dynmap-web:
     external: true
     name: minecraft-dynmap-web
