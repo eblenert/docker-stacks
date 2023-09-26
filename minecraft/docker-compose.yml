@@ -49,6 +49,8 @@ services:
     tty: true
     stdin_open: true
     restart: always
+    networks:
+     - mc-net
     volumes:
       - creative-world:/data
     logging:
