@@ -49,6 +49,7 @@ services:
 networks:
   default:
     name: web-internal
+    external: true
 
 volumes:
   conf:
