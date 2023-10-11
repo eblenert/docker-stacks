@@ -65,7 +65,7 @@ services:
       - INIT_MEMORY=1G
       - MAX_MEMORY=3G
       - EULA=TRUE
-      - TYPE=VANILLA
+      - TYPE=SPIGOT
       - DIFFICULTY=hard
       - ENFORCE_WHITELIST=TRUE
       - ENABLE_WHITELIST=TRUE
