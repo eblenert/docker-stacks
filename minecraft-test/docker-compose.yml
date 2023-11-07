@@ -1,12 +1,12 @@
 version: "3"
 
 services:
- creative:
+  server:
    image: itzg/minecraft-server
    environment:
-     - VERSION=1.19.4
-     - INIT_MEMORY=2G
-     - MAX_MEMORY=5G
+     - VERSION=1.20.2
+     - INIT_MEMORY=1G
+     - MAX_MEMORY=2G
      - EULA=TRUE
      - TYPE=SPIGOT
      - ENFORCE_WHITELIST=TRUE
@@ -14,19 +14,18 @@ services:
      - MAX_PLAYERS=10
      - VIEW_DISTANCE=10
      - FORCE_GAMEMODE=true
-     - MODE=creative
+     - MODE=survival
      - NETWORK_COMPRESSION_THRESHOLD=-1
      - TZ=Europe/Bucharest
      - BUILD_FROM_SOURCE=true
-     - LEVEL_TYPE=flat
-     - GENERATE_STRUCTURES=false
+     - GENERATE_STRUCTURES=true
    tty: true
    stdin_open: true
    restart: always
    ports:
      - 25565:25565
    volumes:
-     - creative-world:/data
+     - test-world:/data
    logging:
      driver: "json-file"
      options:
@@ -35,4 +34,4 @@ services:
 volumes:
   creative-world:
     external: true
-    name: minecraft-creative-world
+    name: minecraft-test-world
