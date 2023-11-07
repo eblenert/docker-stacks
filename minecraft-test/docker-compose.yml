@@ -32,6 +32,6 @@ services:
        max-size: "5m"
 
 volumes:
-  creative-world:
+  test-world:
     external: true
     name: minecraft-test-world
