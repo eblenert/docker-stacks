@@ -15,8 +15,8 @@ services:
     networks:
       - web-internal
       - media-internal
-#    ports:
-#      - 7878:7878
+    ports:
+      - 7878:7878
     restart: unless-stopped
   transmission:
     image: lscr.io/linuxserver/transmission:latest
