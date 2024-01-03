@@ -16,6 +16,9 @@ services:
       - type: bind
         source: $MOVIES_HOST_PATH
         target: /downloads/movies
+      - type: bind
+        source: $DOWNLOADS_HOST_PATH
+        target: /downloads/data
     networks:
       - web-internal
       - media-internal
