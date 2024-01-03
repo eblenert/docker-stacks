@@ -22,41 +22,36 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
-  # transmission:
-  #   image: lscr.io/linuxserver/transmission:latest
-  #   container_name: transmission
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TRANSMISSION_WEB_HOME= #optional
-  #     - USER=
-  #     - PASS= #optional
-  #     - WHITELIST= #optional
-  #     - PEERPORT= #optional
-  #     - HOST_WHITELIST= #optional
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TRANSMISSION_WEB_HOME= #optional
+      - USER=
+      - PASS= #optional
+      - WHITELIST= #optional
+      - PEERPORT= #optional
+      - HOST_WHITELIST= #optional
 
-  #   volumes:
-  #     - config-transmission:/config
-  #     - movies:/downloads/movies
-  #     - downloads:/downloads/data
-  #   ports:
-  #     - 9091:9091
-  #     - 51413:51413
-  #     - 51413:51413/udp
-  #   networks:
-  #     - media-internal
-  #   restart: unless-stopped
-
-# volumes:
-# config-transmission:
-#   external: true
-#   name: config-transmission
-# movies:
-#   external: true
-#   name: movies
-# downloads:
-#   external: true
-#   name: downloads
+    volumes:
+      - type: bind
+        source: $TRANSMISSION_HOST_PATH
+        target: /config
+      - type: bind
+        source: $MOVIES_HOST_PATH
+        target: /downloads/movies
+      - type: bind
+        source: $DOWNLOADS_HOST_PATH
+        target: /downloads/data
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    networks:
+      - media-internal
+    restart: unless-stopped
 
 networks:
   web-internal:
