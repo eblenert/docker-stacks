@@ -13,7 +13,9 @@ services:
       - type: bind
         source: $RADARR_HOST_PATH
         target: /config
-      - movies:/downloads/movies
+      - type: bind
+        source: $MOVIES_HOST_PATH
+        target: /downloads/movies
     networks:
       - web-internal
       - media-internal
@@ -45,16 +47,16 @@ services:
   #     - media-internal
   #   restart: unless-stopped
 
-volumes:
-  config-transmission:
-    external: true
-    name: config-transmission
-  movies:
-    external: true
-    name: movies
-  downloads:
-    external: true
-    name: downloads
+# volumes:
+# config-transmission:
+#   external: true
+#   name: config-transmission
+# movies:
+#   external: true
+#   name: movies
+# downloads:
+#   external: true
+#   name: downloads
 
 networks:
   web-internal:
