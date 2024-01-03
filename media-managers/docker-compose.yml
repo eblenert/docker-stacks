@@ -30,8 +30,8 @@ services:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1026
+      - PGID=65537
       - TRANSMISSION_WEB_HOME= #optional
       - USER=
       - PASS= #optional
