@@ -10,7 +10,9 @@ services:
       - VIRTUAL_HOST=${RADARR_HOST}
       - VIRTUAL_PORT=7878
     volumes:
-      - config-radarr:/config
+      - type: bind
+        source: $RADARR_HOST_PATH
+        target: /config
       - movies:/downloads/movies
     networks:
       - web-internal
@@ -18,35 +20,32 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
-  transmission:
-    image: lscr.io/linuxserver/transmission:latest
-    container_name: transmission
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TRANSMISSION_WEB_HOME= #optional
-      - USER=
-      - PASS= #optional
-      - WHITELIST= #optional
-      - PEERPORT= #optional
-      - HOST_WHITELIST= #optional
+  # transmission:
+  #   image: lscr.io/linuxserver/transmission:latest
+  #   container_name: transmission
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TRANSMISSION_WEB_HOME= #optional
+  #     - USER=
+  #     - PASS= #optional
+  #     - WHITELIST= #optional
+  #     - PEERPORT= #optional
+  #     - HOST_WHITELIST= #optional
 
-    volumes:
-      - config-transmission:/config
-      - movies:/downloads/movies
-      - downloads:/downloads/data
-    ports:
-      - 9091:9091
-      - 51413:51413
-      - 51413:51413/udp
-    networks:
-      - media-internal
-    restart: unless-stopped
+  #   volumes:
+  #     - config-transmission:/config
+  #     - movies:/downloads/movies
+  #     - downloads:/downloads/data
+  #   ports:
+  #     - 9091:9091
+  #     - 51413:51413
+  #     - 51413:51413/udp
+  #   networks:
+  #     - media-internal
+  #   restart: unless-stopped
 
 volumes:
-  config-radarr:
-    external: true
-    name: config-radarr
   config-transmission:
     external: true
     name: config-transmission
