@@ -5,8 +5,8 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1026
+      - PGID=65537
       - VIRTUAL_HOST=${RADARR_HOST}
       - VIRTUAL_PORT=7878
     volumes:
