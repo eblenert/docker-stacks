@@ -9,6 +9,7 @@ services:
       - PGID=65537
       - VIRTUAL_HOST=${RADARR_HOST}
       - VIRTUAL_PORT=7878
+      - TZ=Europe/Bucharest
     volumes:
       - type: bind
         source: $RADARR_HOST_PATH
@@ -26,6 +27,27 @@ services:
       - 7878:7878
     restart: unless-stopped
 
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1026
+      - PGID=65537
+      - TZ=Europe/Bucharest
+    volumes:
+      - type: bind
+        source: $SONARR_CONFIG_PATH
+        target: /config
+      - type: bind
+        source: $SHOWS_HOST_PATH
+        target: /downloads/shows
+      - type: bind
+        source: $DOWNLOADS_HOST_PATH
+        target: /downloads/data
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
@@ -38,7 +60,7 @@ services:
       - WHITELIST= #optional
       - PEERPORT= #optional
       - HOST_WHITELIST= #optional
-
+      - TZ=Europe/Bucharest
     volumes:
       - type: bind
         source: $TRANSMISSION_HOST_PATH
