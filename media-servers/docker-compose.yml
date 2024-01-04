@@ -16,6 +16,9 @@ services:
       - type: bind
         source: $MOVIES_HOST_PATH
         target: /data/movies
+      - type: bind
+        source: $SHOWS_HOST_PATH
+        target: /data/shows
       
     restart: 'unless-stopped'
     devices:
