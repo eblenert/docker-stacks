@@ -71,6 +71,9 @@ services:
       - type: bind
         source: $DOWNLOADS_HOST_PATH
         target: /downloads/data
+      - type: bind
+        source: $SHOWS_HOST_PATH
+        target: /downloads/shows
     ports:
       - 9091:9091
       - 51413:51413
