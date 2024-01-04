@@ -2,19 +2,20 @@ version: "3"
 
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
-    network_mode: 'host'
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+      - 1900:1900/udp #optional
     volumes:
-      - type: bind
-        source: $JELLYFIN_CACHE_PATH
-        target: /cache
       - type: bind
         source: $JELLYFIN_CONFIG_PATH
         target: /config
       - type: bind
         source: $MOVIES_HOST_PATH
-        target: /media
+        target: /data/movies
       
     restart: 'unless-stopped'
     devices:
