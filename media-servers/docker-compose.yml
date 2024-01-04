@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    network_mode: 'host'
+    volumes:
+      - type: bind
+        source: $JELLYFIN_CACHE_PATH
+        target: /cache
+      - type: bind
+        source: $JELLYFIN_CONFIG_PATH
+        target: /config
+      - type: bind
+        source: $MOVIES_HOST_PATH
+        target: /media
+      
+    restart: 'unless-stopped'
+
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://jellyfin.home.tbcl.ro
+      - PUID=1026
+      - PGID=65537
