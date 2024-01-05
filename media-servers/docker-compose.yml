@@ -15,10 +15,10 @@ services:
         target: /config
       - type: bind
         source: $MOVIES_HOST_PATH
-        target: /data/movies
+        target: /media/movies
       - type: bind
         source: $SHOWS_HOST_PATH
-        target: /data/shows
+        target: /media/shows
       
     restart: 'unless-stopped'
     devices:
@@ -26,6 +26,7 @@ services:
       - /dev/dri/card0:/dev/dri/card0
 
     environment:
+      - TZ=Europe/Bucharest
       - JELLYFIN_PublishedServerUrl=http://jellyfin.home.tbcl.ro
       - PUID=1026
       - PGID=65537

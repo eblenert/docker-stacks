@@ -7,7 +7,7 @@ services:
     environment:
       - PUID=1026
       - PGID=65537
-      - VIRTUAL_HOST=${RADARR_HOST}
+      - VIRTUAL_HOST=${RADARR_URL}
       - VIRTUAL_PORT=7878
       - TZ=Europe/Bucharest
     volumes:
@@ -16,10 +16,10 @@ services:
         target: /config
       - type: bind
         source: $MOVIES_HOST_PATH
-        target: /downloads/movies
+        target: /media/movies
       - type: bind
         source: $DOWNLOADS_HOST_PATH
-        target: /downloads/data
+        target: /downloads
     networks:
       - web-internal
       - media-internal
@@ -40,10 +40,10 @@ services:
         target: /config
       - type: bind
         source: $SHOWS_HOST_PATH
-        target: /downloads/shows
+        target: /media/shows
       - type: bind
         source: $DOWNLOADS_HOST_PATH
-        target: /downloads/data
+        target: /downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -66,14 +66,9 @@ services:
         source: $TRANSMISSION_HOST_PATH
         target: /config
       - type: bind
-        source: $MOVIES_HOST_PATH
-        target: /downloads/movies
-      - type: bind
         source: $DOWNLOADS_HOST_PATH
-        target: /downloads/data
-      - type: bind
-        source: $SHOWS_HOST_PATH
-        target: /downloads/shows
+        target: /downloads
+
     ports:
       - 9091:9091
       - 51413:51413
