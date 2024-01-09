@@ -110,7 +110,7 @@ services:
 volumes:
   survival-world:
     external: true
-    name: minecraft-survival-world-new
+    name: minecraft-survival-world
   dynmap-web:
     external: true
     name: minecraft-dynmap-web
