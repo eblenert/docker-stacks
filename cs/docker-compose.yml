@@ -9,6 +9,7 @@ services:
       - 27015:27015/udp
     environment:
       - MAX_PLAYERS=10
+      - ADMIN_STEAM_ID
     logging:
       driver: "json-file"
       options:
