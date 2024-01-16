@@ -9,10 +9,6 @@ services:
       - 27015:27015/udp
     volumes:
       - cs_data:/hlds
-    environment:
-      - SERVER_NAME=TeBatCuLingura's server
-      - MAX_PLAYERS=10
-      - ADMIN_STEAM_ID
     logging:
       driver: "json-file"
       options:
