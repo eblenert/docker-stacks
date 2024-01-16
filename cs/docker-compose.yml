@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  cs16:
+    image: minecraft/docker-compose.yml
+    restart: always
+    ports:
+      - 27015:27015
+      - 27015:27015/udp
+    environment:
+      - MAX_PLAYERS=10
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+
+volumes:
+  cs_data:
+    external: true
+    name: cs_data
+
