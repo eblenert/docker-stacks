@@ -7,6 +7,8 @@ services:
     ports:
       - 27015:27015
       - 27015:27015/udp
+    volumes:
+      - cs_data:/hlds
     environment:
       - SERVER_NAME=TeBatCuLingura's server
       - MAX_PLAYERS=10
