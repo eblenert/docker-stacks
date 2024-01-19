@@ -5,7 +5,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8081:8080
     networks:
       - mc-net
     logging:
@@ -30,27 +30,27 @@ services:
   creative:
     image: itzg/minecraft-server
     environment:
-     - VERSION=1.20.2
-     - INIT_MEMORY=1G
-     - MAX_MEMORY=3G
-     - EULA=TRUE
-     - TYPE=SPIGOT
-     - ENFORCE_WHITELIST=TRUE
-     - ENABLE_WHITELIST=TRUE
-     - MAX_PLAYERS=10
-     - VIEW_DISTANCE=10
-     - FORCE_GAMEMODE=true
-     - MODE=creative
-     - NETWORK_COMPRESSION_THRESHOLD=-1
-     - TZ=Europe/Bucharest
-     - BUILD_FROM_SOURCE=true
-     - LEVEL_TYPE=flat
-     - GENERATE_STRUCTURES=false
+      - VERSION=1.20.2
+      - INIT_MEMORY=1G
+      - MAX_MEMORY=3G
+      - EULA=TRUE
+      - TYPE=SPIGOT
+      - ENFORCE_WHITELIST=TRUE
+      - ENABLE_WHITELIST=TRUE
+      - MAX_PLAYERS=10
+      - VIEW_DISTANCE=10
+      - FORCE_GAMEMODE=true
+      - MODE=creative
+      - NETWORK_COMPRESSION_THRESHOLD=-1
+      - TZ=Europe/Bucharest
+      - BUILD_FROM_SOURCE=true
+      - LEVEL_TYPE=flat
+      - GENERATE_STRUCTURES=false
     tty: true
     stdin_open: true
     restart: always
     networks:
-     - mc-net
+      - mc-net
     volumes:
       - creative-world:/data
     logging:
@@ -98,9 +98,9 @@ services:
     image: itzg/mc-router
     restart: always
     ports:
-     - 25565:25565
+      - 25565:25565
     networks:
-     - mc-net
+      - mc-net
     command: --mapping=minecraft.tbcl.ro=survival:25565,survival.minecraft.tbcl.ro=survival:25565,creative.minecraft.tbcl.ro=creative:25565,test.minecraft.tbcl.ro=192.168.3.1:25565
     logging:
       driver: "json-file"
