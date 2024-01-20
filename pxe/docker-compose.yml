@@ -12,8 +12,12 @@ services:
       - PORT_RANGE=30000:30010 #optional
       - SUBFOLDER=/ #optional
     volumes:
-      - config:/config # optional
-      - assets:/assets # optional
+      - type: bind
+        source: $PXE_CONFIG
+        target: /config
+      - type: bind
+        source: $PXE_DATA
+        target: /assets
     ports:
       - 3000:3000
       - 8080:80 #optional
