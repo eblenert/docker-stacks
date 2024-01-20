@@ -14,11 +14,9 @@ services:
     volumes:
       - config:/config # optional
       - assets:/assets # optional
-    network_mode: host
-    # ports:
-    #   - 3000:3000
-    #   - 69:69/udp
-    #   - 8080:80 #optional
+    ports:
+      - 3000:3000
+      - 8080:80 #optional
     restart: unless-stopped
 
 volumes:
