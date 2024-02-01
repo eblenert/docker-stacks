@@ -30,8 +30,31 @@ services:
      driver: "json-file"
      options:
        max-size: "5m"
+  backups:
+    image: itzg/mc-backup
+    environment:
+      BACKUP_INTERVAL: "2h"
+      RCON_HOST: server
+      PRE_BACKUP_SCRIPT: |
+        echo "Before backup!"
+      PAUSE_IF_NO_PLAYERS: true
+      PLAYERS_ONLINE_CHECK_INTERVAL: "1h"
+      PRUNE_BACKUPS_DAYS: 7
+      PRUNE_RESTIC_RETENTION: "--keep-daily 7 --keep-weekly 5 --keep-monthly 12 --keep-yearly 75"
+      RESTIC_REPOSITORY: /backups
+      RESTIC_PASSWORD:
+      
+    volumes:
+      # mount the same volume used by server, but read-only
+      - test-world:/data:ro
+      # use a host attached directory so that it in turn can be backed up
+      # to external/cloud storage
+      - test-backup:/backups
 
 volumes:
   test-world:
     external: true
     name: minecraft-test-world
+  test-backup:
+    external: true
+    name: minecraft-test-world-backup
