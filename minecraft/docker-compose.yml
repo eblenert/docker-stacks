@@ -94,6 +94,28 @@ services:
       options:
         max-size: "5m"
 
+  backups:
+    image: itzg/mc-backup
+    environment:
+      BACKUP_INTERVAL: "2h"
+      RCON_HOST: survival
+      PAUSE_IF_NO_PLAYERS: true
+      PRUNE_RESTIC_RETENTION: "--keep-daily 7 --keep-weekly 4 --keep-monthly 12"
+      RESTIC_REPOSITORY: /backups
+      RESTIC_PASSWORD:
+      
+    volumes:
+      # mount the same volume used by server, but read-only
+      - survival-world:/data:ro
+      # use a host attached directory so that it in turn can be backed up
+      # to external/cloud storage
+      - survival-backup:/backups
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+
+
   mc-router:
     image: itzg/mc-router
     restart: always
@@ -111,6 +133,9 @@ volumes:
   survival-world:
     external: true
     name: minecraft-survival-world
+  survival-backup:
+    external: true
+    name: minecraft-survival-world-backups
   dynmap-web:
     external: true
     name: minecraft-dynmap-web
