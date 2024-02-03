@@ -97,6 +97,7 @@ services:
   backups:
     image: itzg/mc-backup
     environment:
+      RESTIC_HOSTNAME: minecraft-survival
       BACKUP_METHOD: restic
       BACKUP_INTERVAL: "2h"
       RCON_HOST: survival
