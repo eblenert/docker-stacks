@@ -103,7 +103,8 @@ services:
       PRUNE_RESTIC_RETENTION: "--keep-daily 7 --keep-weekly 4 --keep-monthly 12"
       RESTIC_REPOSITORY: /backups
       RESTIC_PASSWORD:
-      
+    networks:
+      - mc-net
     volumes:
       # mount the same volume used by server, but read-only
       - survival-world:/data:ro
