@@ -61,7 +61,7 @@ services:
   survival:
     image: itzg/minecraft-server
     environment:
-      - VERSION=1.20.2
+      - VERSION=1.20.4
       - INIT_MEMORY=1G
       - MAX_MEMORY=3G
       - EULA=TRUE
