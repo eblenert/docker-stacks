@@ -31,5 +31,5 @@ services:
 
 networks:
   macvlan_network: 
-      name: macvlan-br0
+      name: macvlan-br0@eth0
       external: true
