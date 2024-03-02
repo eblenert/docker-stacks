@@ -18,9 +18,17 @@ services:
       - 8443:8443
       - 3478:3478/udp
       - 10001:10001/udp
-      - 8082:8080
+      - 8080:8080
+      - 1900:1900/udp #optional
       - 8843:8843 #optional
       - 8880:8880 #optional
       - 6789:6789 #optional
       - 5514:5514/udp #optional
+    networks:
+      macvlan_network:
+        ipv4_address: 192.168.2.2
     restart: unless-stopped
+
+networks:
+  macvlan_networks:
+    external: macvlan-br0
