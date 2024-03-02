@@ -1,6 +1,16 @@
 version: "3"
 
 services:
+  unifi-db:
+    image: docker.io/mongo:<version tag>
+    container_name: unifi-db
+    volumes:
+      - $UNIFI_DB_HOST_PATH:/data/db
+      - $UNIFI_DB_INIT_HOST_PATH/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    restart: unless-stopped
+    networks:
+      - home-net
+
   unifi:
     image: lscr.io/linuxserver/unifi-network-application:latest
     container_name: unifi-controller
@@ -25,11 +35,14 @@ services:
       - 6789:6789 #optional
       - 5514:5514/udp #optional
     networks:
-      macvlan_network:
-        ipv4_address: 192.168.2.2
+      - home-net
+      - macvlan_network:
+          ipv4_address: 192.168.2.2
     restart: unless-stopped
 
 networks:
+  home-net:
+    name: home-net
   macvlan_network: 
-      name: macvlan-br0
-      external: true
+    name: macvlan-br0
+    external: true
