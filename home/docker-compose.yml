@@ -2,7 +2,7 @@ version: "3"
 
 services:
   unifi:
-    image: lscr.io/linuxserver/unifi-controller:latest
+    image: lscr.io/linuxserver/unifi-network-application:latest
     container_name: unifi-controller
     environment:
       - PUID=1026
