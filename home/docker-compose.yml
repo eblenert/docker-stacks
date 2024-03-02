@@ -30,6 +30,6 @@ services:
     restart: unless-stopped
 
 networks:
-  macvlan_networks:
-    external: 
+  macvlan_network: 
       name: macvlan-br0
+      external: true
