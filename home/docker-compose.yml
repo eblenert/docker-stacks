@@ -23,7 +23,7 @@ services:
       - home-net
 
   unifi:
-    image: image: lscr.io/linuxserver/unifi-controller:latest
+    image: lscr.io/linuxserver/unifi-controller:latest
     container_name: unifi-controller
     environment:
       - PUID=1026
