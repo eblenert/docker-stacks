@@ -26,6 +26,7 @@ services:
       - 5514:5514/udp #optional
     networks:
       macvlan_network:
+        ipv4_address: 192.168.2.2
     restart: unless-stopped
 
 networks:
