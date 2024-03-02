@@ -9,8 +9,9 @@ services:
       - PGID=65537
       - MONGO_PASS
     volumes:
-      - $UNIFI_DB_HOST_PATH:/data/db
-      - $UNIFI_DB_INIT_HOST_PATH/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - $UNIFI_DB_HOST_PATH/data:/data/db
+      - $UNIFI_DB_HOST_PATH/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - $UNIFI_DB_HOST_PATH/config:/data/configdb
     restart: unless-stopped
     networks:
       - home-net
