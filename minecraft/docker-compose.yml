@@ -135,7 +135,7 @@ services:
 volumes:
   survival-world:
     external: true
-    name: minecraft-survival-world
+    name: minecraft-survival-world-2
   survival-backup:
     external: true
     name: minecraft-survival-world-backups
