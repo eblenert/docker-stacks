@@ -151,4 +151,5 @@ volumes:
 
 networks:
   mc-net:
+    external: true
     name: mc-net
