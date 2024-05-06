@@ -21,7 +21,6 @@ services:
         source: $DOWNLOADS_HOST_PATH
         target: /downloads
     networks:
-      - web-internal
       - media-internal
     ports:
       - 7878:7878
@@ -46,6 +45,8 @@ services:
         target: /downloads
     ports:
       - 8989:8989
+    networks:
+      - media-internal
     restart: unless-stopped
 
   transmission:
@@ -78,9 +79,6 @@ services:
     restart: unless-stopped
 
 networks:
-  web-internal:
-    external: true
-    name: web-internal
   media-internal:
     external: true
     name: media-internal
