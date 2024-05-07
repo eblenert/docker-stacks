@@ -7,9 +7,13 @@ services:
     environment:
       - PUID=1026
       - PGID=65537
-      - VIRTUAL_HOST=${RADARR_URL}
-      - VIRTUAL_PORT=7878
       - TZ=Europe/Bucharest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.home.tbcl.ro`)"
+      - "traefik.http.services.radarr.loadbalancer.server.port=7878"
+      - "traefik.http.routers.radarr.entrypoints=websecure"
+      - "traefik.http.routers.radarr.tls.certresolver=myresolver"
     volumes:
       - type: bind
         source: $RADARR_HOST_PATH
@@ -21,14 +25,19 @@ services:
         source: $DOWNLOADS_HOST_PATH
         target: /downloads
     networks:
+      - web
       - media-internal
-    ports:
-      - 7878:7878
     restart: unless-stopped
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.home.tbcl.ro`)"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+      - "traefik.http.routers.sonarr.entrypoints=websecure"
+      - "traefik.http.routers.sonarr.tls.certresolver=myresolver"
     environment:
       - PUID=1026
       - PGID=65537
@@ -43,10 +52,9 @@ services:
       - type: bind
         source: $DOWNLOADS_HOST_PATH
         target: /downloads
-    ports:
-      - 8989:8989
     networks:
       - media-internal
+      - web
     restart: unless-stopped
 
   transmission:
