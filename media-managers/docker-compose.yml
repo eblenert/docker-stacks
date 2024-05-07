@@ -80,8 +80,9 @@ services:
       - 51413:51413
       - 51413:51413/udp
     networks:
-      - media-internal
       - web
+      - media-internal
+
     restart: unless-stopped
 
 networks:
