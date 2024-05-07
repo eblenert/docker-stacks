@@ -48,7 +48,7 @@ volumes:
     external: true
     name: letsencrypt
 
-#networks:
-#  web:
-#    name: web
-#    external: true
+networks:
+  web:
+    name: web
+    external: true

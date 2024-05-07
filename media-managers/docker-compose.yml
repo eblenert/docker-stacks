@@ -81,9 +81,13 @@ services:
       - 51413:51413/udp
     networks:
       - media-internal
+      - web
     restart: unless-stopped
 
 networks:
+  web:
+    name: web
+    external: true
   media-internal:
     external: true
     name: media-internal
