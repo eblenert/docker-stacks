@@ -4,8 +4,13 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.home.tbcl.ro`)"
+      - "traefik.http.routers.jellyfin.entrypoints=websecure"
+      - "traefik.http.routers.jellyfin.tls.certresolver=myresolver"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
     ports:
-      - 8096:8096
       - 8920:8920 #optional
       - 7359:7359/udp #optional
       - 1900:1900/udp #optional
@@ -19,8 +24,8 @@ services:
       - type: bind
         source: $SHOWS_HOST_PATH
         target: /media/shows
-      
-    restart: 'unless-stopped'
+
+    restart: "unless-stopped"
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card0:/dev/dri/card0
@@ -30,3 +35,10 @@ services:
       - JELLYFIN_PublishedServerUrl=http://jellyfin.home.tbcl.ro
       - PUID=1026
       - PGID=65537
+    networks:
+      - web
+
+networks:
+  web:
+    name: web
+    external: true
