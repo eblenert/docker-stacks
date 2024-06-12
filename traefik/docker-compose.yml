@@ -23,6 +23,7 @@ services:
       - AWS_SECRET_ACCESS_KEY
       - AWS_REGION
       - AWS_HOSTED_ZONE_ID
+    restart: always
     ports:
       # The HTTP port
       - "80:80"
