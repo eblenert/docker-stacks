@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  discord-jira-bot:
+    image: eblenert/discord-jira-bot
+    restart: unless-stopped
+    ports:
+      - 80:80
+    networks:
+      - web
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+
+networks:
+  web:
+    external: true
+    name: web
