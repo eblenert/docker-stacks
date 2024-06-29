@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   discord-jira-bot:
     image: eblenert/discord-jira-bot
