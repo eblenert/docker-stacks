@@ -5,7 +5,7 @@ services:
     image: eblenert/discord-jira-bot
     restart: unless-stopped
     ports:
-      - 80:80
+      - 80:3000
     networks:
       - web
     logging:
