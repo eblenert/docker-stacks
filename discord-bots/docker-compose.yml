@@ -6,7 +6,7 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jira.rule=Host(`jira.home.tbcl.ro`)"
+      - "traefik.http.routers.jira.rule=Host(`jira.oracle.tbcl.ro`)"
       - "traefik.http.services.jira.loadbalancer.server.port=3000"
       - "traefik.http.routers.jira.entrypoints=websecure"
       - "traefik.http.routers.jira.tls.certresolver=myresolver"
