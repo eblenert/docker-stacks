@@ -59,13 +59,13 @@ services:
         max-size: "5m"
 
   survival:
-    image: itzg/minecraft-server
+    image: registry.home.tbcl.ro/minecraft-server:latest
     environment:
-      - VERSION=1.20.4
       - INIT_MEMORY=1G
       - MAX_MEMORY=3G
       - EULA=TRUE
-      - TYPE=SPIGOT
+      - TYPE=CUSTOM
+      - CUSTOM_SERVER=/spigot-server.jar
       - DIFFICULTY=hard
       - ENFORCE_WHITELIST=TRUE
       - ENABLE_WHITELIST=TRUE
@@ -76,7 +76,6 @@ services:
       - SPAWN_PROTECTION=4
       - TZ=Europe/Bucharest
       - NETWORK_COMPRESSION_THRESHOLD=-1
-      - BUILD_FROM_SOURCE=true
       - MARIADB_SURVIVAL_PASSWORD
     tty: true
     stdin_open: true
